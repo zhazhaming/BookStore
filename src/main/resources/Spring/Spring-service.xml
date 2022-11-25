@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--扫描service包-->
+    <context:component-scan base-package="com.zhazha.service"/>
+
+    <!--注册ServiceImpl(可以通过注解或者是直接配置bean)-->
+    <bean id="UserServiceImpl" class="com.zhazha.service.UserServiceImpl">
+        <property name="usermapper" ref="usermapper"/>
+    </bean>
+    <bean id="BookServiceImpl" class="com.zhazha.service.BookServiceImpl">
+        <property name="bookmapper" ref="bookmapper"/>
+    </bean>
+    <bean id="ManagerServiceImpl" class="com.zhazha.service.ManagerServiceImpl">
+        <property name="managermapper" ref="managermapper"/>
+    </bean>
+    <bean id="OrderServiceImpl" class="com.zhazha.service.OrderServiceImpl">
+        <property name="ordermapper" ref="ordermapper"/>
+        <property name="bookmapper" ref="bookmapper"/>
+    </bean>
+
+    <!-- 配置事务管理器 -->
+    <bean id="trainsactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSoure"/>
+    </bean>
+</beans>

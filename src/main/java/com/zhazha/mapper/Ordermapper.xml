@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhazha.mapper.Ordermapper">
+
+    <insert id="addOrder" parameterType="com.zhazha.pojo.Order">
+        insert into book.t_order (orderId,createTime,price,status,userId) values (#{orderId},#{createTime},#{price},#{status},#{userId})
+    </insert>
+
+    <select id="queryOrderByuserId"  resultType="com.zhazha.pojo.Order">
+        select * from book.t_order where userId = #{userId}
+    </select>
+
+    <select id="queryOrder" resultType="com.zhazha.pojo.Order">
+        select * from book.t_order
+    </select>
+
+    <update id="updateOrderByUserId" >
+        update book.t_order set status = #{status} where orderId = #{orderId}
+    </update>
+
+    <insert id="addOrderItem" parameterType="com.zhazha.pojo.Order_item">
+        insert into book.t_order_item (id,name,price,total_price,count,orderId) values (#{id},#{name},#{price},#{total_price},#{count},#{orderId})
+    </insert>
+
+    <select id="queryOrderItemByOrderId" resultType="com.zhazha.pojo.Order_item">
+        select * from book.t_order_item where orderId = #{orderId}
+    </select>
+</mapper>

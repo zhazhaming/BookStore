@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhazha.mapper.Usermapper">
+
+    <insert id="addUser" parameterType="com.zhazha.pojo.User">
+        insert into book.t_user(id,username,password,email) values (#{id},#{username},#{password},#{email});
+    </insert>
+
+    <update id="updateUser" parameterType="com.zhazha.pojo.User">
+        update book.t_user set username = #{username} ,password=#{password},email=#{email} where id =#{id};
+    </update>
+
+    <select id="queryUserByName" parameterType="com.zhazha.pojo.User" resultType="com.zhazha.pojo.User">
+        select * from book.t_user where username = #{username}
+    </select>
+
+    <select id="queryUserByNamePassword" resultType="com.zhazha.pojo.User" parameterType="com.zhazha.pojo.User">
+        select * from book.t_user where username=#{username} and password = #{password};
+    </select>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhazha.mapper.Bookmapper">
+    <select id="queryAllBook" resultType="com.zhazha.pojo.Book" parameterType="map">
+        select * from book.t_book limit #{currIndex},#{pageSize}
+    </select>
+
+    <select id="queryBookById" resultType="com.zhazha.pojo.Book">
+        select * from book.t_book where id = #{id}
+    </select>
+
+    <insert id="addBook" parameterType="com.zhazha.pojo.Book">
+        insert into book.t_book(id,name,price,author,sales,stock,img_path)  values (#{id},#{name},#{price},#{author},#{sales},#{stock},#{img_path})
+    </insert>
+
+    <delete id="deleteBookById" parameterType="int">
+        delete from book.t_book where id = #{id}
+    </delete>
+
+    <update id="updateBook" parameterType="com.zhazha.pojo.Book">
+        update book.t_book set name=#{name},price=#{price},author=#{author},sales=#{sales},stock=#{stock},img_path=#{img_path} where  id=#{id}
+    </update>
+
+    <select id="countBook"  resultType="int">
+        select count(id) from book.t_book
+    </select>
+
+    <select id="queryBookByMoney" resultType="com.zhazha.pojo.Book" parameterType="int">
+        select * from book.t_book where price between #{min} and #{max} limit #{currPage},#{pageSize}
+    </select>
+
+    <select id="countBookByMoney" resultType="int">
+        select count(id) from book.t_book where price between #{min} and #{max}
+    </select>
+
+    <select id="queryBookImg"  resultType="String">
+        select img_path from book.t_book  where id = #{id}
+    </select>
+</mapper>
